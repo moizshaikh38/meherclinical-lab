@@ -1,0 +1,17 @@
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /private/
+Disallow: /*.json$
+
+Sitemap: https://meherclinicallab.com/sitemap.xml
+
+# Google
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 5
+
+# Bing
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 5

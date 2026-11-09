@@ -1,0 +1,53 @@
+import { createFileRoute } from "@tanstack/react-router";
+import type {} from "@tanstack/react-start";
+
+const BASE_URL = "https://meherclinicallab.com";
+
+interface SitemapEntry {
+  path: string;
+  lastmod: string;
+  changefreq: "always" | "hourly" | "daily" | "weekly" | "monthly" | "yearly" | "never";
+  priority: string;
+}
+
+export const Route = createFileRoute("/sitemap.xml")({
+  server: {
+    handlers: {
+      GET: async () => {
+        const entries: SitemapEntry[] = [
+          { path: "/", lastmod: "2025-07-18", changefreq: "weekly", priority: "1.0" },
+          { path: "/#about", lastmod: "2025-07-18", changefreq: "monthly", priority: "0.8" },
+          { path: "/#services", lastmod: "2025-07-18", changefreq: "weekly", priority: "0.9" },
+          { path: "/#packages", lastmod: "2025-07-18", changefreq: "weekly", priority: "0.9" },
+          { path: "/#home-collection", lastmod: "2025-07-18", changefreq: "monthly", priority: "0.8" },
+          { path: "/#reference-labs", lastmod: "2025-07-18", changefreq: "monthly", priority: "0.7" },
+          { path: "/#faq", lastmod: "2025-07-18", changefreq: "monthly", priority: "0.7" },
+          { path: "/#contact", lastmod: "2025-07-18", changefreq: "monthly", priority: "0.8" },
+        ];
+        const urls = entries.map((e) =>
+          [
+            `  <url>`,
+            `    <loc>${BASE_URL}${e.path}</loc>`,
+            `    <lastmod>${e.lastmod}</lastmod>`,
+            `    <changefreq>${e.changefreq}</changefreq>`,
+            `    <priority>${e.priority}</priority>`,
+            `  </url>`,
+          ].join("\n"),
+        );
+        const xml = [
+          `<?xml version="1.0" encoding="UTF-8"?>`,
+          `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"`,
+          `        xmlns:xhtml="http://www.w3.org/1999/xhtml">`,
+          ...urls,
+          `</urlset>`,
+        ].join("\n");
+        return new Response(xml, {
+          headers: {
+            "Content-Type": "application/xml",
+            "Cache-Control": "public, max-age=3600",
+          },
+        });
+      },
+    },
+  },
+});

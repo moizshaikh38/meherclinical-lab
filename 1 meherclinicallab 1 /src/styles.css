@@ -1,0 +1,223 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 12px);
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  --color-navy: var(--navy);
+  --color-navy-light: var(--navy-light);
+  --color-teal: var(--teal);
+  --color-green-med: var(--green-med);
+  --color-orange: var(--orange);
+  --color-ink: var(--ink);
+
+  --font-display: "Poppins", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "Space Grotesk", ui-monospace, monospace;
+}
+
+:root {
+  --radius: 0.875rem;
+
+  /* Brand */
+  --navy: oklch(0.22 0.06 250);        /* #0A2647 */
+  --navy-light: oklch(0.32 0.08 250);  /* #144272 */
+  --teal: oklch(0.72 0.13 185);        /* #00BFA6 */
+  --green-med: oklch(0.55 0.13 155);   /* #2E8B57 */
+  --orange: oklch(0.72 0.19 45);       /* #FF6B35 */
+  --ink: oklch(0.18 0.03 265);
+
+  --background: oklch(0.985 0.008 240); /* #F8FBFF */
+  --foreground: oklch(0.18 0.03 265);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.18 0.03 265);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.18 0.03 265);
+  --primary: var(--navy);
+  --primary-foreground: oklch(0.98 0.005 240);
+  --secondary: oklch(0.95 0.02 220);
+  --secondary-foreground: var(--navy);
+  --muted: oklch(0.955 0.012 240);
+  --muted-foreground: oklch(0.5 0.02 260);
+  --accent: var(--teal);
+  --accent-foreground: oklch(1 0 0);
+  --destructive: oklch(0.6 0.22 25);
+  --destructive-foreground: oklch(1 0 0);
+  --border: oklch(0.9 0.015 235);
+  --input: oklch(0.9 0.015 235);
+  --ring: var(--teal);
+
+  --gradient-brand: linear-gradient(135deg, oklch(0.22 0.06 250), oklch(0.32 0.08 250));
+  --gradient-cta: linear-gradient(135deg, oklch(0.72 0.13 185), oklch(0.55 0.13 155));
+  --gradient-hero: linear-gradient(135deg, rgba(10,38,71,0.92) 0%, rgba(20,66,114,0.85) 55%, rgba(0,191,166,0.65) 100%);
+  --gradient-soft: linear-gradient(180deg, #F8FBFF 0%, #EAF4FB 100%);
+
+  --shadow-soft: 0 10px 30px -12px rgba(10,38,71,0.15);
+  --shadow-med: 0 20px 50px -20px rgba(10,38,71,0.25);
+  --shadow-glow: 0 0 40px rgba(0,191,166,0.35);
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  h1, h2, h3, h4, h5 {
+    font-family: var(--font-display);
+    letter-spacing: -0.02em;
+  }
+}
+
+@utility glass {
+  background: color-mix(in oklab, white 70%, transparent);
+  backdrop-filter: blur(16px) saturate(140%);
+  -webkit-backdrop-filter: blur(16px) saturate(140%);
+  border: 1px solid color-mix(in oklab, white 60%, transparent);
+}
+
+@utility glass-dark {
+  background: color-mix(in oklab, #0A2647 55%, transparent);
+  backdrop-filter: blur(18px) saturate(160%);
+  -webkit-backdrop-filter: blur(18px) saturate(160%);
+  border: 1px solid color-mix(in oklab, white 15%, transparent);
+}
+
+@utility gradient-brand {
+  background-image: var(--gradient-brand);
+}
+
+@utility gradient-cta {
+  background-image: var(--gradient-cta);
+}
+
+@utility gradient-hero {
+  background-image: var(--gradient-hero);
+}
+
+@utility gradient-text {
+  background-image: linear-gradient(135deg, #00BFA6, #2E8B57);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+@utility shadow-soft {
+  box-shadow: var(--shadow-soft);
+}
+@utility shadow-med {
+  box-shadow: var(--shadow-med);
+}
+@utility shadow-glow {
+  box-shadow: var(--shadow-glow);
+}
+
+@utility bg-grid {
+  background-image:
+    linear-gradient(rgba(10,38,71,0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(10,38,71,0.06) 1px, transparent 1px);
+  background-size: 44px 44px;
+}
+
+@keyframes float-slow {
+  0%, 100% { transform: translateY(0) }
+  50% { transform: translateY(-14px) }
+}
+@keyframes pulse-ring {
+  0% { box-shadow: 0 0 0 0 rgba(0,191,166,0.55) }
+  70% { box-shadow: 0 0 0 22px rgba(0,191,166,0) }
+  100% { box-shadow: 0 0 0 0 rgba(0,191,166,0) }
+}
+@keyframes shimmer {
+  0% { background-position: -200% 0 }
+  100% { background-position: 200% 0 }
+}
+@keyframes gradient-shift {
+  0%, 100% { background-position: 0% 50% }
+  50% { background-position: 100% 50% }
+}
+
+@utility animate-float {
+  animation: float-slow 6s ease-in-out infinite;
+}
+@utility animate-pulse-ring {
+  animation: pulse-ring 2s infinite;
+}
+@utility animate-gradient {
+  background-size: 200% 200%;
+  animation: gradient-shift 8s ease infinite;
+}
+@keyframes kenburns {
+  0% { transform: scale(1) translate(0, 0); }
+  100% { transform: scale(1.12) translate(-1.5%, -1%); }
+}
+@utility animate-kenburns {
+  animation: kenburns 20s ease-in-out infinite alternate;
+  will-change: transform;
+}
+
+/* Hide Lovable branding badge completely */
+#lovable-badge,
+#lovable-badge * {
+  display: none !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+  opacity: 0 !important;
+  width: 0 !important;
+  height: 0 !important;
+  overflow: hidden !important;
+  position: absolute !important;
+  clip: rect(0, 0, 0, 0) !important;
+}
+
+/* Visually hidden but still crawlable by search engines */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
